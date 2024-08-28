@@ -5,7 +5,7 @@ const express = require('express')
 const app = express()
 
 app.get('/', function (req, res) {
-  app.use(express.static('index.html'))
+  app.use(express.static('./'))
   // res.send('Hello Node from Ex on local dev box')
 })
 
