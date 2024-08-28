@@ -9,8 +9,8 @@ app.get('/', function (req, res) {
   res.sendFile(path.join('index.html'));
 })
 
-app.listen(3000);
-
+app.listen(3000, () => {
+});
 
 
 
