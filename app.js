@@ -4,10 +4,11 @@ const path = require('path');
 
 console.log('im on a node server');
 
+app.use(express.static(path.join('./')));
 app.get('/', function (req, res) {
-  // res.send('Hello Node from Ex on local dev box')
-  res.sendFile(path.join('index.html'));
-})
+
+
+});
 
 app.listen(3000, () => {
 });
