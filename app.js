@@ -1,5 +1,6 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+const path = require('path');
 
 console.log('im on a node server');
 
@@ -8,7 +9,7 @@ app.get('/', function (req, res) {
   res.sendFile(path.join('/index.html'));
 })
 
-app.listen(3000)
+app.listen(3000);
 
 
 
