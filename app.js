@@ -5,7 +5,8 @@ const express = require('express')
 const app = express()
 
 app.get('/', function (req, res) {
-  res.send('Hello Node from Ex on local dev box')
+  app.use(express.static('index.html'))
+  // res.send('Hello Node from Ex on local dev box')
 })
 
 app.listen(3000)
