@@ -20,9 +20,10 @@ app.listen(3000);
 
 // const express = require('express')
 // const app = express()
+// app.use(express.static('./public/'))
 
 // app.get('/', function (req, res) {
-//   res.send('Hello Node from Ex on local dev box')
+//   res.sendfile('index.html');
 // })
 
 // app.listen(3000)
