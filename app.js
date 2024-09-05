@@ -75,4 +75,3 @@ app.listen(3000)
 
 
 
-// let result = await client.db("kalani-db").collection("dev-king(kalani)").find({}).toArray();
