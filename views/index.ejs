@@ -1,4 +1,13 @@
-
 <h1>my ejs page</h1>
-<br> 
-<%=myServerVariable %> 
+<br>
+<a href="/">static html</a>
+
+<% if (Array.isArray(ejsResult)) { %>
+  <% ejsResult.forEach((value) => { %>
+    <p><%= value.post %></p>
+  <% }); %>
+<% } else { %>
+  <p><%= ejsResult.post %></p>
+<% } %>
+
+<p><%= myServerVariable %></p>
