@@ -1,9 +1,8 @@
-
 require('dotenv').config()
 const express = require('express')
 const app = express()
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = process.env.MONGO_URI; 
+const uri = process.env.MONGO_URI;
 
 app.set('view engine', 'ejs')
 app.use(express.static('./public/'))
@@ -38,24 +37,6 @@ run().catch(console.dir);
 // function whateverNameOfIt (params) {}
 // ()=>{}
 
-app.get('/mongo', async (req,res)=>{
-
-  console.log('in /mongo');
-  await client.connect();
-  
-  console.log('connected?');
-  // Send a ping to confirm a successful connection
-  
-  let result = await client.db("kalani-db").collection("dev-king(kalani)").find({}).toArray();
-  console.log(result); 
-
-  res.render('mongo', {
-    mongoResult : result
-  });
-
-})
-
-
 app.get('/', function (req, res) {
   // res.send('Hello Node from Ex on local dev box')
   res.sendFile('index.html');
@@ -70,8 +51,42 @@ app.get('/ejs', (req,res)=>{
   //can you get content from client...to console? 
 })
 
+app.get('/read', async (req,res)=>{
+
+  console.log('in /mongo');
+  await client.connect();
+  
+  console.log('connected?');
+  // Send a ping to confirm a successful connection
+  
+  let result = await client.db("kalani-db").collection("dev-king(kalani)").find({}).toArray();
+  console.log(result);
+
+  res.render('mongo', {
+    mongoResult : result
+  });
+
+})
+
+app.get('/insert', async (req,res)=> {
+
+  console.log('in /insert');
+  //connect to db,
+  await client.connect();
+  //point to the collection 
+  await client.db("kalani-db").collection("dev-king(kalani)").insertOne({ post: 'hardcoded post insert '});
+  await client.db("kalani-db").collection("dev-king(kalani)").insertOne({ iJustMadeThisUp: 'hardcoded new key '});  
+  //insert into it
+  res.render('insert');
+
+}); 
+
 app.listen(3000)
 
 
 
 
+// let result = await client.db("kalani-db").collection("dev-king(kalani)").find({}).toArray();
+// console.log(result);
+// await client.db("kalani-db").collection("dev-king(kalani)").insertOne({ post: 'hardcoded post insert '});
+//   await client.db("kalani-db").collection("dev-king(kalani)").insertOne({ iJustMadeThisUp: 'hardcoded new key '});
