@@ -1,9 +1,13 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
+const { urlencoded } = require('body-parser')
+const { ObjectId } = require('mongodb')
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGO_URI;
 
+app.use(bodyParser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 app.use(express.static('./public/'))
 
@@ -59,11 +63,12 @@ app.get('/read', async (req,res)=>{
   console.log('connected?');
   // Send a ping to confirm a successful connection
   
-  let result = await client.db("kalani-db").collection("dev-king(kalani)").find({}).toArray();
-  console.log(result);
+  let result = await client.db("kalani-db").collection("dev-king(kalani)")
+    .find({}).toArray(); 
+  console.log(result); 
 
   res.render('mongo', {
-    mongoResult : result
+    postData : result
   });
 
 })
@@ -81,9 +86,27 @@ app.get('/insert', async (req,res)=> {
 
 }); 
 
+app.post('/update/:id', async (req,res)=>{
+
+  console.log("req.parms.id: ", req.params.id)
+
+  client.connect; 
+  const collection = client.db("kalani-db").collection("dev-king(kalani)");
+  let result = await collection.findOneAndUpdate( 
+  {"_id": new ObjectId(req.params.id)}, { $set: {"post": "NEW POST" } }
+)
+.then(result => {
+  console.log(result); 
+  res.redirect('/read');
+})
+ 
+  //insert into it
+ 
+
+
+})
+
 app.listen(3000)
-
-
 
 
 // let result = await client.db("kalani-db").collection("dev-king(kalani)").find({}).toArray();
