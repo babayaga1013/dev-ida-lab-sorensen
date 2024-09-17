@@ -93,7 +93,7 @@ app.post('/update/:id', async (req,res)=>{
   client.connect; 
   const collection = client.db("kalani-db").collection("dev-king(kalani)");
   let result = await collection.findOneAndUpdate( 
-  {"_id": new ObjectId(req.params.id)}, { $set: {"post": "NEW POST" } }
+  {"_id": new ObjectId(req.params.id)}, { $set: {"post": "CUMBIE IS THE GOAT!!!!" } }
 )
 .then(result => {
   console.log(result); 
