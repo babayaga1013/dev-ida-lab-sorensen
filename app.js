@@ -101,11 +101,26 @@ app.post('/update/:id', async (req,res)=>{
 })
  
   //insert into it
- 
 
+});
 
+app.post('/delete/:id', async (req,res)=>{
+
+  console.log("req.parms.id: ", req.params.id)
+
+  client.connect; 
+  const collection = client.db("kalani-db").collection("dev-king(kalani)");
+  let result = await collection.findOneAndDelete( 
+  {"_id": new ObjectId(req.params.id)})
+
+.then(result => {
+  console.log(result); 
+  res.redirect('/read');
 })
 
+  //insert into it
+
+})
 app.listen(3000)
 
 
