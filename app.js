@@ -7,6 +7,8 @@ const { ObjectId } = require('mongodb')
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGO_URI;
 
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 app.use(express.static('./public/'))
@@ -111,7 +113,10 @@ app.post('/delete/:id', async (req,res)=>{
   //insert into it
 
 })
-app.listen(3000)
+// app.listen(3000)
+app.listen(PORT, () => {
+  console.log(`Server is running & listening on port ${PORT}`);
+});
 
 
 // let result = await client.db("kalani-db").collection("dev-king(kalani)").find({}).toArray();
