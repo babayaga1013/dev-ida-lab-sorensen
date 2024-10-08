@@ -7,6 +7,8 @@ const { ObjectId } = require('mongodb')
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGO_URI;
 
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 app.use(express.static('./public/'))
@@ -23,20 +25,6 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   }
 });
-
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
 
 // function whateverNameOfIt (params) {}
 // ()=>{}
@@ -67,22 +55,26 @@ app.get('/read', async (req,res)=>{
     .find({}).toArray(); 
   console.log(result); 
 
-  res.render('mongo', {
+  res.render('read', {
     postData : result
   });
 
 })
 
-app.get('/insert', async (req,res)=> {
+app.post('/insert', async (req,res)=> {
 
   console.log('in /insert');
+
+  console.log('request', req.body);
+  console.log('request', req.body.newPost);
+
   //connect to db,
   await client.connect();
   //point to the collection 
-  await client.db("kalani-db").collection("dev-king(kalani)").insertOne({ post: 'hardcoded post insert '});
-  await client.db("kalani-db").collection("dev-king(kalani)").insertOne({ iJustMadeThisUp: 'hardcoded new key '});  
+  await client.db("kalani-db").collection("dev-king(kalani)").insertOne({ post: req.body.newPost});
+  // await client.db("kalani-db").collection("dev-king(kalani)").insertOne({ iJustMadeThisUp: 'hardcoded new key '});  
   //insert into it
-  res.render('insert');
+  res.redirect('read');
 
 }); 
 
@@ -121,7 +113,10 @@ app.post('/delete/:id', async (req,res)=>{
   //insert into it
 
 })
-app.listen(3000)
+// app.listen(3000)
+app.listen(PORT, () => {
+  console.log(`Server is running & listening on port ${PORT}`);
+});
 
 
 // let result = await client.db("kalani-db").collection("dev-king(kalani)").find({}).toArray();
