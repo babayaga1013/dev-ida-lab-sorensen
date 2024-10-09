@@ -1,26 +1,49 @@
-$(document).ready(function(){
-  
-    $("img").draggable({
-        stop: function () {
-          console.log("stopping???");
-    
-          let jobs = $("img").position().left;
-    
-          if (jobs > 1100) {
-            console.log("ABOVE 1100", jobs);
-    
-            $("p").text("Congratulations, you won! You have found the GOAT!🐐");
-    
-            $("img").attr("src", "https://una.edu/directory/img/789.jpg");
-        
-            var combinedImageUrl = "https://una.edu/directory/img/789.jpg";
-            $("body").css("background-image", "url('" + combinedImageUrl + "')");
-          } else {
-            console.log("BELOW 1100");
-            var combinedImageUrl = "https://t3.ftcdn.net/jpg/00/85/47/10/360_F_85471075_627dXrWLUCum8gej2oToYXpNMn4pUWNR.jpg";
-            $("body").css("background-image", "url('" + combinedImageUrl + "')");
-            $("p").text("KEEP MOVING RIGHT ---->");
-          }
-        },
-    })
-})
+function toggleMenu() {
+  var menu = document.getElementById("pgMenu");
+  if (menu.style.display === "block") {
+    menu.style.display = "none";
+  } else {
+    menu.style.display = "block";
+  }
+}
+const addButton = document.getElementById('addButton');
+const itemInput = document.getElementById('item');
+const groceryList = document.getElementById('groceryList');
+
+// Add event listener for the "Add Item" button
+addButton.addEventListener('click', function() {
+    const newItem = itemInput.value;
+
+    // Only add item if input is not empty
+    if (newItem.trim() !== '') {
+        const listItem = document.createElement('li');
+        listItem.textContent = newItem;
+
+        // Create the delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.style.marginLeft = '10px'; // Add spacing between the item and the button
+
+        // Add an event listener to delete the item when the button is clicked
+        deleteButton.addEventListener('click', function() {
+            groceryList.removeChild(listItem);
+        });
+
+        // Append the delete button to the list item
+        listItem.appendChild(deleteButton);
+
+        // Append the list item to the grocery list
+        groceryList.appendChild(listItem);
+
+        // Clear the input field
+        itemInput.value = '';
+    }
+});
+
+// Add event listener to listen for "Enter" key press
+itemInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        addButton.click();
+    }
+});
+
