@@ -4,5 +4,5 @@ This web app is called "Snack Attack Pack", it is used to create a grocery list 
 ### Issues
 - [Issue #31](https://github.com/babayaga1013/dev-ida-lab-sorensen/issues/30)
 ### Pull Requests
-- [Pull Request #14](https://github.com/smaldonado1326/effective-lamp-sam01/pull/14)
+- [Pull Request #14](https://github.com/babayaga1013/dev-ida-lab-sorensen/pull/31)
 
