@@ -6,5 +6,7 @@ This web app is called "Snack Attack Pack", it is used to create a grocery list 
 ### Pull Requests
 - [Pull Request #31](https://github.com/babayaga1013/dev-ida-lab-sorensen/pull/31)
 
+### Web Application
 ![SnackAttack!](images/snack%20attack.png)
+### MongoDB
 ![Mongo!](images/mongo.png)
